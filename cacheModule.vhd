@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    23:37:49 07/08/2017 
+-- Create Date:    01:52:12 07/09/2017 
 -- Design Name: 
--- Module Name:    cashModule - Behavioral 
+-- Module Name:    cacheModule - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,10 +29,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity cashModule is
-end cashModule;
+entity cacheModule is
+end cacheModule;
 
-architecture Behavioral of cashModule is
+architecture Behavioral of cacheModule is
 
 begin
 
