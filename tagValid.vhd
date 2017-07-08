@@ -30,12 +30,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity tagValid is
+  port (
+	clk, reset_n, wren, invalidate : in std_logic;
+	address: in std_logic_vector(5 downto 0);
+	wrdata: in std_logic_vector(3 downto 0);
+	output: out std_logic_vector(31 downto 0)
+  ) ;
 end tagValid;
 
 architecture Behavioral of tagValid is
-
+	type tgValid is array(0 to 63) of std_logic_vector(4 downto 0);
+   signal tagValid: tgValid;
 begin
 
-
+	output <= tagvalid(to_integer(unsigned(address)));
+	process (clk)
+	begin
+		if clk = '1' and clk'event then
+			if reset_n = '1' then
+				tagValid <= (others => (others => '0') );
+			elsif wren = '1' then
+				tagValid(to_integer(unsigned(address))) <= not(invalidate) and wrdata;
+			end if ;
+		end if ;
+	end process ;
 end Behavioral;
 
