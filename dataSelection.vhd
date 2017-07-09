@@ -42,9 +42,9 @@ architecture Behavioral of dataSelection is
 begin
 
 	cache_output <= w0_data when w0_hit = '1' else
-	w1_data when w1_hit = '1' else
-	mem_data when miss = '1' else
-	"ZZZZZZZZZZZZZZZZ";
+						w1_data when w1_hit = '1' else
+						mem_output when miss = '1' else
+						"ZZZZZZZZZZZZZZZZ";
 	
 end Behavioral;
 
