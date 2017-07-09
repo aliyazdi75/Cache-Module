@@ -35,8 +35,11 @@ entity MRU is
   port (
 	clk: in std_logic;
 	reset: in std_logic;
+	w0_reset : in std_logic;
+	w1_reset : in std_logic;
 	address: in std_logic_vector(5 downto 0);
-	w0_plus, w1_plus, w0_reset, w1_reset : in std_logic;
+	w0_plus : in std_logic;
+	w1_plus : in std_logic;
 	leftUsed: out std_logic
   );
 end MRU;

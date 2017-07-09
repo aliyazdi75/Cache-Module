@@ -32,11 +32,14 @@ use IEEE.numeric_std.all;
 
 entity tagValid is
   port (
-	clk, reset_n, wren, invalidate : in std_logic;
-	address: in std_logic_vector(5 downto 0);
+	clk : in std_logic;
+	reset_n : in std_logic;
+	invalidate : in std_logic;
+	wren : in std_logic;
 	wrdata: in std_logic_vector(3 downto 0);
+	address: in std_logic_vector(5 downto 0);
 	output: out std_logic_vector(31 downto 0)
-  ) ;
+  );
 end tagValid;
 
 architecture Behavioral of tagValid is

@@ -31,8 +31,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity dataSelection is
   port (
-	w0_data, w1_data, mem_output: in std_logic_vector(15 downto 0);
-	w0_hit, w1_hit, miss: in std_logic;
+	miss: in std_logic;
+	w0_hit: in std_logic;
+	w1_hit: in std_logic;
+	w0_data: in std_logic_vector(15 downto 0);
+	w1_data: in std_logic_vector(15 downto 0);
+	mem_output: in std_logic_vector(15 downto 0);
 	cache_output: out std_logic_vector(15 downto 0) 
   );
 end dataSelection;

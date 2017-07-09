@@ -33,7 +33,8 @@ use ieee.numeric_std.all ;
 
 entity dataArray is
   port (
-	clk, wren : in std_logic;
+	clk : in std_logic;
+	wren : in std_logic;
 	address: in std_logic_vector(5 downto 0);
 	wrdata: in std_logic_vector(31 downto 0);
 	data: out std_logic_vector(31 downto 0)

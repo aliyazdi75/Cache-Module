@@ -34,7 +34,7 @@ entity missHitLogic is
 	tag: in std_logic_vector(3 downto 0) ;
 	w0, w1: in std_logic_vector(4 downto 0) ;
 	hit, w0_valid, w1_valid: out std_logic
-  ) ;
+  );
 end missHitLogic;
 
 architecture Behavioral of missHitLogic is
