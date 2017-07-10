@@ -37,9 +37,9 @@ entity MRU is
 	reset: in std_logic;
 	w0_reset : in std_logic;
 	w1_reset : in std_logic;
-	address: in std_logic_vector(5 downto 0);
 	w0_plus : in std_logic;
 	w1_plus : in std_logic;
+	address: in std_logic_vector(5 downto 0);
 	leftUsed: out std_logic
   );
 end MRU;

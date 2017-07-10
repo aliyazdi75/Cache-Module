@@ -38,7 +38,7 @@ entity tagValid is
 	wren : in std_logic;
 	wrdata: in std_logic_vector(3 downto 0);
 	address: in std_logic_vector(5 downto 0);
-	output: out std_logic_vector(31 downto 0)
+	output: out std_logic_vector(4 downto 0)
   );
 end tagValid;
 

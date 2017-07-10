@@ -36,171 +36,171 @@ entity controller is
 	readmem: in std_logic;
 	writemem: in std_logic;
 	hit: in std_logic;
-	w0_validate: in std_logic;
-	w1_validate: in std_logic;
-	tv0_validate: in std_logic;
-	tv1_validate: in std_logic;
-	is_left_greaterthan_right: in std_logic;
-	
+	w0_valid: in std_logic;
+	w1_valid: in std_logic;
+	w0: in std_logic;
+	w1: in std_logic;
+	leftUsed: in std_logic;	
 	memdataready: in std_logic;
-	tv0_reset_n: out std_logic;
-	tv0_wren: out std_logic;
-	tv0_invalidate: out std_logic;
-	tv1_reset_n: out std_logic;
-	tv1_wren: out std_logic;
-	tv1_invalidate: out std_logic;
-	data_array0_wren: out std_logic;
-	data_array1_wren: out std_logic;
+	
+	w0_reset_n: out std_logic;
+	w0_wren: out std_logic;
+	w0_invalidate: out std_logic;
+	w1_reset_n: out std_logic;
+	w1_wren: out std_logic;
+	w1_invalidate: out std_logic;
+	
+	da0_wren: out std_logic;
+	da1_wren: out std_logic;
 	mru_reset: out std_logic;
+	
 	w0_plus: out std_logic;
 	w1_plus: out std_logic;
 	w0_reset: out std_logic;
 	w1_reset : out std_logic;
-	ds_w0_hit: out std_logic;
-	ds_w1_hit: out std_logic;
-	ds_miss: out std_logic;
-	readmemtomem: out std_logic;
-	writememtomem: out std_logic
+	w0_hit: out std_logic;
+	w1_hit: out std_logic;
+	miss: out std_logic;
+
+	read_mem_to_mem: out std_logic;
+	write_mem_to_mem: out std_logic
   );
 end controller;
 
 architecture Behavioral of controller is
-	type state is (reset1, reset2 , wait_s, read_s, read_s_hitormiss, write_s,write_to_cache, write_s_hitormiss);
-	signal current_state : state := reset1 ;
+	type state is (SRst0,SRst1
+					 SMem,
+					 SReadmem,
+					 SHitMiss, 
+					 SWritemem,
+					 SWritecache, 
+					 SWMHitMiss);
+	signal current_state : state := SRst0;
 	signal next_state : state;
 
 begin
 	process (clk)
 	begin
-		if clk = '1' and clk'event then
+		if rising_edge(clk) then
 			current_state <= next_state;
 		end if ;
 	end process ; 
 
-	process(current_state, memdataready, readmem, writemem)
+	process(current_state, readmem, writemem, memdataready)
 	begin 
-	if not falling_edge(memdataready)and not falling_edge(readmem) and not falling_edge(writemem) then
-		
-	
-		tv0_reset_n <= '0';
-		tv0_wren <= '0';
-		tv0_invalidate <= '0';
-		tv1_reset_n <= '0';
-		tv1_wren <= '0';
-		tv1_invalidate <= '0';
-		data_array0_wren <= '0';
-		data_array1_wren <= '0';
-		mru_reset <= '0';
-		w0_plus <= '0';
-		w1_plus <= '0';
-		w0_reset <= '0';
-		w1_reset <= '0';
-		ds_w0_hit <= '0';
-		ds_w1_hit <= '0';
-		ds_miss <= '0';
-		readmemtomem <= '0';
-		writememtomem <= '0';
+		if not(falling_edge(readmem)) and not(falling_edge(writemem))
+			and not(falling_edge(memdataready)) then	
 
-	case current_state is
-	
-		when reset1 =>
-			tv1_reset_n <= '1';
-			tv0_reset_n <= '1';
-			mru_reset <= '1';
-			next_state <= reset2;
+			w0_reset_n <= '0';
+			w0_wren <= '0';
+			w0_invalidate <= '0';
+			w1_reset_n <= '0';
+			w1_wren <= '0';
+			w1_invalidate <= '0';
+			da0_wren <= '0';
+			da1_wren <= '0';
+			mru_reset <= '0';
+			w0_plus <= '0';
+			w1_plus <= '0';
+			w0_reset <= '0';
+			w1_reset <= '0';
+			w0_hit <= '0';
+			w1_hit <= '0';
+			miss <= '0';
+			read_mem_to_mem <= '0';
+			write_mem_to_mem <= '0';
+			
+			case current_state is	
+				when SRst0 =>
+					mru_reset <= '1';
+					w1_reset_n <= '1';
+					w0_reset_n <= '1';
+					next_state <= SRst1;
 
-		when reset2 =>
-			tv1_reset_n <= '1';
-			tv0_reset_n <= '1';
-			mru_reset <= '1';
-			next_state <= wait_s;
+				when SRst1 =>
+					mru_reset <= '1';
+					w1_reset_n <= '1';
+					w0_reset_n <= '1';
+					next_state <= SMem;
 
-		when wait_s =>
-			if readmem = '1' then
-				next_state <= read_s_hitormiss;
-
-			elsif writemem = '1' then
-				next_state <= write_s;
-			else
-				next_state <= wait_s;
-			end if ;
-
-		when read_s_hitormiss =>
-			if hit = '1' then
-					if w0_validate = '1' then
-						ds_w0_hit <= '1';
-						w0_plus <='1';
-					elsif w1_validate = '1' then
-						ds_w1_hit <= '1';
-						w1_plus <= '1';
-					end if ;
-					next_state <= wait_s;
-				else
-					next_state <= read_s;
-				end if ;
-
-		when read_s => 
-			readmemtomem <= '1';
-			if memdataready = '1' then
-				next_state <= write_to_cache;
-				
-
-			else
-				next_state <= read_s;
-			end if ;
-
-
-		when write_to_cache =>
-			if tv0_validate = '0' then
-					tv0_wren <= '1';
-					tv0_invalidate <= '0';
-					data_array0_wren <= '1';
-				elsif tv1_validate = '0' then
-					tv1_wren <= '1';
-					tv1_invalidate <= '0';
-					data_array1_wren <= '1';
-				elsif is_left_greaterthan_right = '1' then
-					tv0_wren <= '1';
-					tv0_invalidate <= '0';
-					data_array0_wren <= '1';
-					w0_reset <= '1';
-				elsif is_left_greaterthan_right = '0' then
-					tv1_wren <= '1';
-					tv1_invalidate <= '0';
-					data_array1_wren <= '1';
-					w1_reset  <= '1';
-				end if ;
-				ds_miss <= '1';
-				next_state <= wait_s;
-
-		when write_s =>
-			writememtomem <= '1';
-			if memdataready = '1' then
-				next_state <= write_s_hitormiss;
-			else
-				next_state <= write_s;
-			end if ;
-
-		when write_s_hitormiss =>
-			if hit = '1' then
-					if w0_validate = '1' then
-						tv0_invalidate <= '1';
-						w0_reset <= '1';
+				when SReadmem => 
+					read_mem_to_mem <= '1';
+					if memdataready = '0' then
+						next_state <= SReadmem;			
 					else
-						tv1_invalidate <= '1';
-						w1_reset <= '1';
+						next_state <= SWritecache;
+					end if;
+
+				when SMem =>
+					if readmem = '1' then
+						next_state <= SHitMiss;
+					elsif writemem = '1' then
+						next_state <= SWritemem;
+					else
+						next_state <= SMem;
+					end if;
+
+				when SHitMiss =>
+					if hit = '1' then
+						if w1_valid = '1' then
+							w1_plus <= '1';
+							w1_hit <= '1';
+						elsif w0_valid = '1' then
+							w0_plus <='1';
+							w0_hit <= '1';
+						end if;
+						next_state <= SMem;
+					else
+						next_state <= SReadmem;
+					end if;
+
+				when SWritemem =>
+					write_mem_to_mem <= '1';
+					if memdataready = '0' then
+						next_state <= SWritemem;
+					else
+						next_state <= SWMHitMiss;
+					end if;
+
+				when SWMHitMiss =>
+					if hit = '1' then
+						if w0_valid = '1' then
+							w0_reset <= '1';
+							w0_invalidate <= '1';
+						else
+							w1_reset <= '1';
+							w1_invalidate <= '1';
+						end if;
+					end if;
+					next_state <= SMem;
+
+				when SWritecache =>
+					if w0 = '0' then
+						w0_wren <= '1';
+						da0_wren <= '1';
+						w0_invalidate <= '0';
+					elsif w1 = '0' then
+						w1_wren <= '1';
+						da1_wren <= '1';
+						w1_invalidate <= '0';
+					elsif leftUsed = '1' then
+						w0_wren <= '1';
+						w0_reset <= '1';
+						da0_wren <= '1';
+						w0_invalidate <= '0';
+					elsif leftUsed = '0' then
+						w1_wren <= '1';
+						w1_reset  <= '1';
+						da1_wren <= '1';
+						w1_invalidate <= '0';
 					end if ;
-				end if ;
-				next_state <= wait_s;
+					miss <= '1';
+					next_state <= SMem;
 
-		when others =>
-	
-	end case ;
-	end if ;
+				when others => null;
+			
+			end case ;
+		end if ;
 	end process ;
-
-begin
-
-
 end Behavioral;
 
