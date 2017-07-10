@@ -1,0 +1,8 @@
+vhdl work "tagValid.vhd"
+vhdl work "MRU.vhd"
+vhdl work "missHitLogic.vhd"
+vhdl work "memory.vhd"
+vhdl work "dataSelection.vhd"
+vhdl work "dataArray.vhd"
+vhdl work "controller.vhd"
+vhdl work "cacheModule.vhd"

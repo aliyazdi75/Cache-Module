@@ -41,16 +41,18 @@ entity missHitLogic is
 end missHitLogic;
 
 architecture Behavioral of missHitLogic is
-
+signal w0v, w1v : std_logic;
 begin
 
-	w0_valid <= '1' when tag = w0(3 downto 0) and w0(4) = '1' else
+	w0v <= '1' when tag = w0(3 downto 0) and w0(4) = '1' else
 	'0';
 
-	w1_valid <= '1' when tag = w1(3 downto 0) and w1(4) = '1' else
+	w1v <= '1' when tag = w1(3 downto 0) and w1(4) = '1' else
 	'0';
 	
-	hit <= w0_valid or w1_valid;
-
+	hit <= w0v or w1v;
+	w0_valid <= w0v;
+	w1_valid <= w1v;
+	
 end Behavioral;
 

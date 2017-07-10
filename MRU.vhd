@@ -58,16 +58,16 @@ begin
 					rightCtr <= (others => 0);
 				end if;
 
-				if left_counter(to_integer(unsigned(address))) > right_counter(to_integer(unsigned(address))) then
+				if leftCtr(to_integer(unsigned(address))) > rightCtr(to_integer(unsigned(address))) then
 					leftUsed <= '1';
 				else
 					leftUsed <= '0';
 				end if;
 
 				if w0_plus = '1' then
-					leftCtr(to_integer(unsigned(address))) <= left_counter(to_integer(unsigned(address))) + 1;
+					leftCtr(to_integer(unsigned(address))) <= leftCtr(to_integer(unsigned(address))) + 1;
 				elsif w1_plus = '1' then
-					rightCtr(to_integer(unsigned(address))) <= right_counter(to_integer(unsigned(address))) + 1;
+					rightCtr(to_integer(unsigned(address))) <= rightCtr(to_integer(unsigned(address))) + 1;
 				elsif w0_reset = '1' then
 					leftCtr(to_integer(unsigned(address))) <= 0;
 				elsif w1_reset = '1' then

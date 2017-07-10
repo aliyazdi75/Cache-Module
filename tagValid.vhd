@@ -54,7 +54,7 @@ begin
 			if reset_n = '1' then
 				tagValid <= (others => (others => '0') );
 			elsif wren = '1' then
-				tagValid(to_integer(unsigned(address))) <= not(invalidate) and wrdata;
+				tagValid(to_integer(unsigned(address))) <= not(invalidate) & wrdata;
 			end if ;
 		end if ;
 	end process ;
