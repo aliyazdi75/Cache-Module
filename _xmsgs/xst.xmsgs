@@ -5,40 +5,7 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="error" file="HDLCompiler" num="806" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 72: Syntax error near &quot;<arg fmt="%s" index="1">SMem</arg>&quot;.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 78: &lt;<arg fmt="%s" index="1">srst0</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 118: &lt;<arg fmt="%s" index="1">srst1</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 124: &lt;<arg fmt="%s" index="1">smem</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 140: &lt;<arg fmt="%s" index="1">smem</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 152: &lt;<arg fmt="%s" index="1">smem</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 175: &lt;<arg fmt="%s" index="1">smem</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 198: &lt;<arg fmt="%s" index="1">smem</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 114: &lt;<arg fmt="%s" index="1">srst0</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 120: &lt;<arg fmt="%s" index="1">srst1</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="69" delta="new" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 134: &lt;<arg fmt="%s" index="1">smem</arg>&gt; is not declared.
-</msg>
-
-<msg type="error" file="HDLCompiler" num="854" delta="old" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\controller.vhd" Line 70: Unit &lt;<arg fmt="%s" index="1">behavioral</arg>&gt; ignored due to previous errors.
+<msg type="error" file="HDLCompiler" num="76" delta="old" >"D:\Ali Yazdi\Documents\GitHub\Cache-Module\memory.vhd" Line 74: <arg fmt="%s" index="1">statement</arg> is not synthesizable since it does not hold its value under NOT(clock-edge) condition
 </msg>
 
 </messages>

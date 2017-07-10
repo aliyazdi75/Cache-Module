@@ -62,13 +62,13 @@ entity controller is
 	w1_hit: out std_logic;
 	miss: out std_logic;
 
-	read_mem_to_mem: out std_logic;
-	write_mem_to_mem: out std_logic
+	read_mem_mem: out std_logic;
+	write_mem_mem: out std_logic
   );
 end controller;
 
 architecture Behavioral of controller is
-	type state is (SRst0,SRst1
+	type state is (SRst0,SRst1,
 					 SMem,
 					 SReadmem,
 					 SHitMiss, 
@@ -107,8 +107,8 @@ begin
 			w0_hit <= '0';
 			w1_hit <= '0';
 			miss <= '0';
-			read_mem_to_mem <= '0';
-			write_mem_to_mem <= '0';
+			read_mem_mem <= '0';
+			write_mem_mem <= '0';
 			
 			case current_state is	
 				when SRst0 =>
@@ -124,7 +124,7 @@ begin
 					next_state <= SMem;
 
 				when SReadmem => 
-					read_mem_to_mem <= '1';
+					read_mem_mem <= '1';
 					if memdataready = '0' then
 						next_state <= SReadmem;			
 					else
@@ -155,7 +155,7 @@ begin
 					end if;
 
 				when SWritemem =>
-					write_mem_to_mem <= '1';
+					write_mem_mem <= '1';
 					if memdataready = '0' then
 						next_state <= SWritemem;
 					else

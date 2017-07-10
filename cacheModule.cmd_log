@@ -1,0 +1,2 @@
+xst -intstyle ise -ifn "D:/Ali Yazdi/Documents/GitHub/Cache-Module/cacheModule.xst" -ofn "D:/Ali Yazdi/Documents/GitHub/Cache-Module/cacheModule.syr" 
+xst -intstyle ise -ifn "D:/Ali Yazdi/Documents/GitHub/Cache-Module/cacheModule.xst" -ofn "D:/Ali Yazdi/Documents/GitHub/Cache-Module/cacheModule.syr" 

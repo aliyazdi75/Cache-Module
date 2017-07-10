@@ -104,8 +104,8 @@ end component;
 component controller 
   port (
 		clk: in std_logic;
-		read_mem_mem: in std_logic;
-		write_mem_mem: in std_logic;
+		readmem: in std_logic;
+		writemem: in std_logic;
 		hit: in std_logic;
 		w0_valid: in std_logic;
 		w1_valid: in std_logic;
@@ -135,15 +135,16 @@ component controller
 end component;
 signal w0_reset_n, w1_reset_n, w0_invalidate, w1_invalidate, w0_wren, w1_wren,
 			 hit, w0_valid, w1_valid, miss, w0_hit, w1_hit, leftUsed, w0_plus, w1_plus,
-			 w0_reset, w1_reset, mru_reset, memdataready, read_mem_mem, write_mem_mem : std_logic;
+			 w0_reset, w1_reset, mru_reset, memdataready, read_mem_mem, write_mem_mem,
+			da0_wren, da1_wren : std_logic;
 signal w0, w1 : std_logic_vector(4 downto 0);
 signal w0_data, w1_data, mem_output : std_logic_vector(15 downto 0);
 
 begin
 
-	aliTagValid1 : tagValid PORT MAP (clk, w0_reset_n, w0_invalidate, w0_wren, w0_wren, address(9 downto 6), address(5 downto 0), w0);
+	aliTagValid1 : tagValid PORT MAP (clk, w0_reset_n, w0_invalidate, w0_wren, address(9 downto 6), address(5 downto 0), w0);
 
-	aliTagValid2 : tagValid PORT MAP (clk, w1_reset_n, w1_invalidate, w1_wren, w1_wren, address(9 downto 6), address(5 downto 0), w1);
+	aliTagValid2 : tagValid PORT MAP (clk, w1_reset_n, w1_invalidate, w1_wren, address(9 downto 6), address(5 downto 0), w1);
 
 	aliDataArray1 : dataArray PORT MAP (clk, da0_wren, address(5 downto 0), mem_output, w0_data);
 

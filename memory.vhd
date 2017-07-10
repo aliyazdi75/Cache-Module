@@ -71,7 +71,7 @@ begin
 
 		memdataready <= '0';
 
-		if  clk'event and clk = '1' then
+		if  rising_edge(clk) then
 			ad := to_integer(unsigned(addressbus));
 
 			if readmem = '1' then -- Readiing :)

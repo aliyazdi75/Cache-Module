@@ -1,0 +1,8 @@
+work	"MRU.vhd"
+work	"cacheModule.vhd"
+work	"controller.vhd"
+work	"dataArray.vhd"
+work	"dataSelection.vhd"
+work	"memory.vhd"
+work	"missHitLogic.vhd"
+work	"tagValid.vhd"
